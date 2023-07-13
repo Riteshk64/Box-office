@@ -1,3 +1,4 @@
+// App file (uses react router: updates the URL from a link click without making another request for another document from the server)
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import Home from './pages/Home';
@@ -6,10 +7,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Handles  */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/starred" element={<Starred />} />
         </Route>
+        {/* To display page not found (404) */}
         <Route path="*" element={<div>Not Found :(</div>} />
         {/* <Route path="/" element={<App />}>
         <Route index element={<Home />} />
