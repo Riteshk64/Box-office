@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import Home from './pages/Home';
 import Starred from './pages/Starred';
+
 function App() {
   return (
     <BrowserRouter>
