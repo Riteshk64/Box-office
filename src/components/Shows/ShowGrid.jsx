@@ -1,3 +1,4 @@
+// To display show cards in a grid
 import ShowCard from './ShowCard';
 
 const ShowGrid = ({ shows }) => {

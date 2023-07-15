@@ -1,4 +1,6 @@
+// To display actor cards in a grid
 import ActorCard from './ActorCard';
+
 const ActorGrid = ({ actors }) => {
   return (
     <div>

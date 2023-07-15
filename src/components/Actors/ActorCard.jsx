@@ -1,3 +1,4 @@
+// display actor search results in cards
 const ActorCard = ({ name, image, gender, country, birthday, deathday }) => {
   return (
     <div>

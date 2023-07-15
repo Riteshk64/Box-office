@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import Home from './pages/Home';
 import Starred from './pages/Starred';
+import Show from './pages/Show';
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/starred" element={<Starred />} />
         </Route>
+        {/* Dynamic Routing */}
+        <Route path="/show/:showId" element={<Show />} />
         {/* To display page not found (404) */}
         <Route path="*" element={<div>Not Found :(</div>} />
         {/* <Route path="/" element={<App />}>

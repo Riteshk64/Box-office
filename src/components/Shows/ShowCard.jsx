@@ -1,3 +1,4 @@
+// display show search results in cards
 import { Link } from 'react-router-dom';
 const ShowCard = ({ name, image, id, summary }) => {
   const summaryStripped = summary
@@ -13,7 +14,7 @@ const ShowCard = ({ name, image, id, summary }) => {
       <p>{summaryStripped}</p>
 
       <div>
-        <Link to="/">Read more</Link>
+        <Link to={`/show/${id}`}>Read more</Link>
         <button>Star me</button>
       </div>
     </div>
