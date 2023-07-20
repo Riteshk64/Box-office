@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getShowById } from '../api/tvmaze';
-const Show = () => {
-  const { showId } = useParams(); // useParams() - To access parameters in the current route(url).
+
+const useShowById = showId => {
   const [showData, setShowData] = useState(null); // For data from show id
   const [showError, setShowError] = useState(null); // For errors
 
@@ -19,6 +19,13 @@ const Show = () => {
 
     fetchData();
   }, [showId]); // The function code runs when the component runs and the return statement runs the component unmounts. Used the manipulate the page during the component's life cycle.
+
+  return { showData, showError };
+};
+
+const Show = () => {
+  const { showId } = useParams(); // useParams() - To access parameters in the current route(url).
+  const { showData, showError } = useShowById(showId);
 
   if (showError) {
     return <div>We have an error: {showError.message}</div>;
