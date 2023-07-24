@@ -1,7 +1,6 @@
 // To display individual show pages with complete info
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getShowById } from '../api/tvmaze';
-
 import { useQuery } from 'react-query';
 import ShowMainData from '../components/Shows/ShowMainData';
 import Details from '../components/Shows/Details';
@@ -38,6 +37,12 @@ const Show = () => {
     refetchOnWindowFocus: false,
   });
 
+  const navigateTo = useNavigate();
+
+  const onGoBack = () => {
+    navigateTo('/');
+  };
+
   if (showError) {
     return <div>We have an error: {showError.message}</div>;
   }
@@ -45,6 +50,10 @@ const Show = () => {
   if (showData) {
     return (
       <div>
+        <button type="button" onClick={onGoBack}>
+          Go back to home page
+        </button>
+
         <ShowMainData
           image={showData.image}
           name={showData.name}
