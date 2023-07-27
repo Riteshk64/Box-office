@@ -1,41 +1,9 @@
 // To display show cards in a grid
-import { useEffect, useReducer } from 'react';
+import { useStarredShows } from '../../lib/useStarredShows';
 import ShowCard from './ShowCard';
 
-const usePersistedReducer = (reducer, initialState, localStorageKey) => {
-  const [state, dispatch] = useReducer(starredShowReducer, [], initial => {
-    const persistedValue = localStorage.getItem(localStorageKey);
-    return persistedValue ? JSON.parse(persistedValue) : initial;
-  });
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(state));
-  }, [state, localStorageKey]);
-
-  return [state, dispatch];
-};
-
-// {action: 'STAR', showId: ''}
-// {action: 'UNSTAR', showId: ''}
-
-const starredShowReducer = (currentStarred, action) => {
-  switch (action.type) {
-    case 'STAR':
-      return currentStarred.concat(action.showId);
-    case 'UNSTAR':
-      return currentStarred.filter(showId => showId !== action.showId);
-    default:
-      return currentStarred;
-  }
-};
-
 const ShowGrid = ({ shows }) => {
-  const [starredShow, dispatchStarred] = usePersistedReducer(
-    starredShowReducer,
-    [],
-    'starredShows'
-  );
-
-  console.log(starredShow);
+  const [starredShow, dispatchStarred] = useStarredShows();
 
   const onStarMeClick = showId => {
     const isStarred = starredShow.includes(showId);
@@ -56,6 +24,7 @@ const ShowGrid = ({ shows }) => {
           id={data.show.id}
           summary={data.show.summary}
           onStarMeClick={onStarMeClick}
+          isStarred={starredShow.includes(data.show.id)}
         />
       ))}
     </div>
