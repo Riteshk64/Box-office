@@ -1,5 +1,5 @@
 // Home page of the app(Uses two-way data binding)
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { searchForShows, searchForActors } from './../api/tvmaze';
 import SearchForm from '../components/SearchFrom';
 import ShowGrid from '../components/Shows/ShowGrid';
