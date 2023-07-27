@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { useSearchString } from '../lib/useSearchStr';
 
 const SearchForm = ({ onSearch }) => {
   // user input
-  const [searchStr, setSearchStr] = useState('');
+  const [searchStr, setSearchStr] = useSearchString();
 
   // conatains radio button values
   const [searchOption, setSearchOption] = useState('Shows');
