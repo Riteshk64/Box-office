@@ -1,11 +1,13 @@
 // To display individual show pages with complete info
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getShowById } from '../api/tvmaze';
 import { useQuery } from 'react-query';
+import styled from 'styled-components';
 import ShowMainData from '../components/Shows/ShowMainData';
 import Details from '../components/Shows/Details';
 import Seasons from '../components/Shows/Seasons';
 import Cast from '../components/Shows/Cast';
+import { TextCenter } from '../common/TextCentre';
 
 // const useShowById = showId => {
 //   const [showData, setShowData] = useState(null); // For data from show id
@@ -39,20 +41,16 @@ const Show = () => {
 
   const navigateTo = useNavigate();
 
-  const onGoBack = () => {
-    navigateTo('/');
-  };
-
   if (showError) {
     return <div>We have an error: {showError.message}</div>;
   }
 
   if (showData) {
     return (
-      <div>
-        <button type="button" onClick={onGoBack}>
-          Go back to home page
-        </button>
+      <ShowPageWrapper>
+        <BackHomeWrapper>
+          <Link to="/">Go back to home</Link>
+        </BackHomeWrapper>
 
         <ShowMainData
           image={showData.image}
@@ -62,29 +60,61 @@ const Show = () => {
           genres={showData.genres}
         />
 
-        <div>
+        <InfoBlock>
           <h2>Details</h2>
           <Details
             status={showData.status}
             premiered={showData.premiered}
             network={showData.network}
           />
-        </div>
+        </InfoBlock>
 
-        <div>
+        <InfoBlock>
           <h2>Seasons</h2>
           <Seasons seasons={showData._embedded.seasons} />
-        </div>
+        </InfoBlock>
 
-        <div>
+        <InfoBlock>
           <h2>Cast</h2>
           <Cast cast={showData._embedded.cast} />
-        </div>
-      </div>
+        </InfoBlock>
+      </ShowPageWrapper>
     );
   }
 
-  return <div>Data is loading...</div>;
+  return <TextCenter>Data is loading...</TextCenter>;
 };
 
 export default Show;
+
+const BackHomeWrapper = styled.div`
+  margin-bottom: 30px;
+  text-align: left;
+  a {
+    padding: 10px;
+    color: ${({ theme }) => theme.mainColors.dark};
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+const ShowPageWrapper = styled.div`
+  margin: auto;
+  @media only screen and (min-width: 768px) {
+    max-width: 700px;
+  }
+  @media only screen and (min-width: 992px) {
+    max-width: 900px;
+  }
+`;
+
+const InfoBlock = styled.div`
+  margin-bottom: 40px;
+  h2 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
+`;
