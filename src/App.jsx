@@ -1,5 +1,5 @@
 // App file (uses react router: updates the URL from a link click without making another request for another document from the server)
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import Home from './pages/Home';
 import Starred from './pages/Starred';
@@ -13,7 +13,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalTheme>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             {/* Handles  */}
             <Route element={<MainLayout />}>
@@ -25,7 +25,7 @@ function App() {
             {/* To display page not found (404) */}
             <Route path="*" element={<div>Not Found :(</div>} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </GlobalTheme>
     </QueryClientProvider>
   );
