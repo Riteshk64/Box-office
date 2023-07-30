@@ -1,5 +1,5 @@
 // To display individual show pages with complete info
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getShowById } from '../api/tvmaze';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
@@ -38,8 +38,6 @@ const Show = () => {
     queryFn: () => getShowById(showId),
     refetchOnWindowFocus: false,
   });
-
-  const navigateTo = useNavigate();
 
   if (showError) {
     return <div>We have an error: {showError.message}</div>;
