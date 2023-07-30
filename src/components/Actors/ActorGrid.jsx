@@ -1,6 +1,7 @@
 // To display actor cards in a grid
 import { FlexGrid } from '../../common/FlexGrid';
 import ActorCard from './ActorCard';
+import NotFound from '../../lib/not-found.png';
 
 const ActorGrid = ({ actors }) => {
   return (
@@ -13,9 +14,7 @@ const ActorGrid = ({ actors }) => {
           birthday={data.person.birthday}
           deathday={data.person.deathday}
           gender={data.person.gender}
-          image={
-            data.person.image ? data.person.image.medium : '/not-found.png'
-          }
+          image={data.person.image ? data.person.image.medium : NotFound}
         />
       ))}
     </FlexGrid>
